@@ -1,0 +1,21 @@
+{
+  "name": "admin/shipping_charges",
+  "description": "Manage shipping charges for orders, including configuration of rates and rules for various shipping methods.",
+  "type": "library",
+  "version": "1.0.0",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "admin\\shipping_charges\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "admin\\shipping_charges\\ShippingChargesModuleServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
