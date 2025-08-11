@@ -20,9 +20,23 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="title">Title</label>
+                                    <label for="keyword">Keyword</label>
                                     <input type="text" name="keyword" id="keyword" class="form-control"
-                                        value="{{ app('request')->query('keyword') }}" placeholder="Enter title">
+                                        value="{{ app('request')->query('keyword') }}" placeholder="Enter shipping method or rate">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="based_on">Status</label>
+                                    <select name="based_on" id="based_on" class="form-control select2">
+                                        <option value="">All</option>
+                                        @foreach(config('shipping_charges.constants.shippingRatesBasedOn') as $key => $label)
+                                            <option value="{{ $key }}"
+                                                {{ app('request')->query('based_on') == $key ? 'selected' : '' }}>
+                                                {{ $label }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-auto mt-1 text-right">
@@ -54,7 +68,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">S. No.</th>
-                                        <th>@sortablelink('shipping_method', 'Shipping Method', [], ['class' => 'text-dark'])</th>
+                                        <th>Shipping Method</th>
                                         <th>@sortablelink('based_on', 'Based On', [], ['class' => 'text-dark'])</th>
                                         <th>@sortablelink('rate', 'Rate', [], ['class' => 'text-dark'])</th>
                                         <th>@sortablelink('created_at', 'Created At', [], ['class' => 'text-dark'])</th>

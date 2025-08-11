@@ -22,7 +22,7 @@
                                 #{{ $shippingRate->id }}</h4>
                             <div>
                                 <a href="{{ route('admin.shipping_rates.index') }}" class="btn btn-secondary ml-2">
-                                    <i class="mdi mdi-arrow-left"></i> Back to List
+                                    Back
                                 </a>
                             </div>
                         </div>

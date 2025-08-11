@@ -20,9 +20,9 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="title">Title</label>
+                                    <label for="keyword">Keyword</label>
                                     <input type="text" name="keyword" id="keyword" class="form-control"
-                                        value="{{ app('request')->query('keyword') }}" placeholder="Enter title">
+                                        value="{{ app('request')->query('keyword') }}" placeholder="Enter shipping zone, name or carrier">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -30,13 +30,9 @@
                                     <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control select2">
                                         <option value="">All</option>
-                                        <option value="draft"
-                                            {{ app('request')->query('status') == 'draft' ? 'selected' : '' }}>Draft
-                                        </option>
-                                        <option value="published"
-                                            {{ app('request')->query('status') == 'published' ? 'selected' : '' }}>Published
-                                        </option>
-                                    </select>
+                                        <option value="0" {{ app('request')->query('status') == '0' ? 'selected' : '' }}>Inactive</option>
+                                        <option value="1" {{ app('request')->query('status') == '1' ? 'selected' : '' }}>Active</option>
+                                    </select>                                   
                                 </div>
                             </div>
                             <div class="col-auto mt-1 text-right">
@@ -68,7 +64,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">S. No.</th>
-                                        <th>@sortablelink('shipping_zone', 'Shipping Zone', [], ['class' => 'text-dark'])</th>
+                                        <th>Shipping Zone</th>
                                         <th>@sortablelink('name', 'Name', [], ['class' => 'text-dark'])</th>
                                         <th>@sortablelink('carrier', 'Carrier', [], ['class' => 'text-dark'])</th>
                                         <th>@sortablelink('status', 'Status', [], ['class' => 'text-dark'])</th>
