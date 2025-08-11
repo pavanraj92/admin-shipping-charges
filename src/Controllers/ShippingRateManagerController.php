@@ -24,6 +24,7 @@ class ShippingRateManagerController extends Controller
     {
         try {
             $shippingRates = ShippingRate::filter($request->query('keyword'))
+                ->filterByBasedOn($request->query('based_on'))
                 ->sortable()
                 ->latest()
                 ->paginate(ShippingRate::getPerPageLimit())

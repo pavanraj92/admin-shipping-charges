@@ -31,11 +31,18 @@ class ShippingMethod extends Model
         'created_at',
     ];
 
-    public function scopeFilter($query, $name)
+    public function scopeFilter($query, $keyword)
     {
-        if ($name) {
-            return $query->where('name', 'like', '%' . $name . '%');
+        if ($keyword) {
+            return $query->where(function ($q) use ($keyword) {
+                $q->whereHas('zone', function ($zoneQuery) use ($keyword) {
+                    $zoneQuery->where('name', 'like', '%' . $keyword . '%');
+                })
+                ->orWhere('name', 'like', '%' . $keyword . '%')
+                ->orWhere('carrier', 'like', '%' . $keyword . '%');
+            });
         }
+
         return $query;
     }
     /**

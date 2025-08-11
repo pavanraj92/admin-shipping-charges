@@ -33,10 +33,29 @@ class ShippingRate extends Model
     public function scopeFilter($query, $keyword)
     {
         if ($keyword) {
+            return $query->where(function ($q) use ($keyword) {
+                $q->whereHas('method', function ($methodQuery) use ($keyword) {
+                    $methodQuery->where('name', 'like', '%' . $keyword . '%');
+                })
+                ->orWhere('rate', 'like', '%' . $keyword . '%');
+            });
+        }
+
+
+        if ($keyword) {
             return $query->where('min_value', 'like', '%' . $keyword . '%')
                          ->orWhere('max_value', 'like', '%' . $keyword . '%')
                          ->orWhere('rate', 'like', '%' . $keyword . '%');
         }
+        return $query;
+    }
+
+    public function scopeFilterByBasedOn($query, $based_on)
+    {
+        if (!is_null($based_on)) {
+            return $query->where('based_on', $based_on);
+        }
+
         return $query;
     }
 

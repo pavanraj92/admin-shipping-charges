@@ -1,6 +1,6 @@
 <?php
 
-namespace Admin\Settings\Database\Seeders;
+namespace Admin\ShippingCharges\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
