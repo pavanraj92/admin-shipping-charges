@@ -101,13 +101,20 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="d-flex flex-column">
+                                                @admincan('shipping_rates_manager_edit')
                                                 <a href="{{ route('admin.shipping_rates.edit', $shippingRate) }}"
                                                     class="btn btn-warning mb-2">
                                                     <i class="mdi mdi-pencil"></i> Edit Shipping Rate
                                                 </a>
-                                                @admincan('shipping_rates_delete')
-                                                    <button type="button" class="btn btn-danger delete-btn"
-                                                        data-url="{{ route('admin.shipping_rates.destroy', $shippingRate) }}">
+                                                @endadmincan
+                                                @admincan('shipping_rates_manager_delete')
+                                                    <button type="button" class="btn btn-danger delete-btn delete-record"
+                                                        title="Delete this record"  
+                                                        data-url="{{ route('admin.shipping_rates.destroy', $shippingRate) }}"
+                                                        data-redirect="{{ route('admin.shipping_rates.index') }}"
+                                                        data-text="Are you sure you want to delete this record?"
+                                                        data-method="DELETE"
+                                                        >
                                                         <i class="mdi mdi-delete"></i> Delete Shipping Rate
                                                     </button>
                                                 @endadmincan

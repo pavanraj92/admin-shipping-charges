@@ -50,20 +50,26 @@ class CheckModuleStatusCommand extends Command
         }
 
         // Check namespace in controller
-        $controllerPath = base_path('Modules/Pages/app/Http/Controllers/Admin/PageManagerController.php');
-        if (File::exists($controllerPath)) {
+        $controllers = [
+            'Shipping Method Controller' => base_path('Modules/ShippingCharges/app/Http/Controllers/Admin/ShippingMethodManagerController.php'),
+            'Shipping Rate Controller' => base_path('Modules/ShippingCharges/app/Http/Controllers/Admin/ShippingRateManagerController.php'),
+        ];
+
+        foreach ($controllers as $name => $controllerPath) {
+            if (File::exists($controllerPath)) {
             $content = File::get($controllerPath);
-            if (str_contains($content, 'namespace Modules\Pages\app\Http\Controllers\Admin;')) {
-                $this->info("\n✅ Controller namespace: CORRECT");
+            if (str_contains($content, 'namespace Modules\ShippingCharges\app\Http\Controllers\Admin;')) {
+                $this->info("\n✅ {$name} namespace: CORRECT");
             } else {
-                $this->error("\n❌ Controller namespace: INCORRECT");
+                $this->error("\n❌ {$name} namespace: INCORRECT");
             }
-            
+
             // Check for test comment
             if (str_contains($content, 'Test comment - this should persist after refresh')) {
-                $this->info("✅ Test comment: FOUND (changes are persisting)");
+                $this->info("✅ Test comment in {$name}: FOUND (changes are persisting)");
             } else {
-                $this->warn("⚠️  Test comment: NOT FOUND");
+                $this->warn("⚠️  Test comment in {$name}: NOT FOUND");
+            }
             }
         }
 
