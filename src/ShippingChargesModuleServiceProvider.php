@@ -30,10 +30,10 @@ class ShippingChargesModuleServiceProvider extends ServiceProvider
         if (is_dir(base_path('Modules/ShippingCharges/database/migrations'))) {
             $this->loadMigrationsFrom(base_path('Modules/ShippingCharges/database/migrations'));
         }
-        $this->mergeConfigFrom(__DIR__ . '/../config/shipping_charges.php', 'shipping_charges.config');
+
         // Also merge config from published module if it exists
         if (file_exists(base_path('Modules/ShippingCharges/config/shipping_charges.php'))) {
-            $this->mergeConfigFrom(base_path('Modules/ShippingCharges/config/shipping_charges.php'), 'shipping_charges.config');
+            $this->mergeConfigFrom(base_path('Modules/ShippingCharges/config/shipping_charges.php'), 'shipping_charges.constants');
         }
         
         // Only publish automatically during package installation, not on every request
@@ -43,9 +43,9 @@ class ShippingChargesModuleServiceProvider extends ServiceProvider
         // Standard publishing for non-PHP files
         $this->publishes([
             __DIR__ . '/../config/' => base_path('Modules/ShippingCharges/config/'),
-            __DIR__ . '/../database/migrations' => base_path('Modules/ShippingCharges/database/migrations'),
+            __DIR__ . '/../database/' => base_path('Modules/ShippingCharges/database/'),
             __DIR__ . '/../resources/views' => base_path('Modules/ShippingCharges/resources/views/'),
-        ], 'shipping_charges');
+        ], 'shipping_charge');
 
         $this->registerAdminRoutes();
     }

@@ -96,12 +96,19 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="d-flex flex-column">
+                                            @admincan('shipping_methods_manager_edit')
                                             <a href="{{ route('admin.shipping_methods.edit', $shippingMethod) }}" class="btn btn-warning mb-2">
                                                 <i class="mdi mdi-pencil"></i> Edit Shipping Method
                                             </a>
-                                            @admincan('shipping_methods_delete')
-                                            <button type="button" class="btn btn-danger delete-btn"
-                                                data-url="{{ route('admin.shipping_methods.destroy', $shippingMethod) }}">
+                                            @endadmincan
+                                            @admincan('shipping_methods_manager_delete')
+                                            <button type="button" class="btn btn-danger delete-btn delete-record"
+                                                title="Delete this record"  
+                                                data-url="{{ route('admin.shipping_methods.destroy', $shippingMethod) }}"
+                                                data-redirect="{{ route('admin.shipping_methods.index') }}"
+                                                data-text="Are you sure you want to delete this record?"
+                                                data-method="DELETE"
+                                                >
                                                 <i class="mdi mdi-delete"></i> Delete Shipping Method
                                             </button>
                                             @endadmincan
