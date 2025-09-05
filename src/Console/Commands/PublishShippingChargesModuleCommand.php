@@ -48,6 +48,7 @@ class PublishShippingChargesModuleCommand extends Command
             // Models
             $basePath . '/Models/ShippingMethod.php' => base_path('Modules/ShippingCharges/app/Models/ShippingMethod.php'),
             $basePath . '/Models/ShippingRate.php' => base_path('Modules/ShippingCharges/app/Models/ShippingRate.php'),
+            $basePath . '/Models/ShippingZone.php' => base_path('Modules/ShippingCharges/app/Models/ShippingZone.php'),
 
             // Requests
             $basePath . '/Requests/ShippingMethodCreateRequest.php' => base_path('Modules/ShippingCharges/app/Http/Requests/ShippingMethodCreateRequest.php'),
@@ -102,6 +103,7 @@ class PublishShippingChargesModuleCommand extends Command
         if (str_contains($sourceFile, 'Controllers')) {
             $content = str_replace('use admin\\shipping_charges\\Models\\ShippingMethod;', 'use Modules\\ShippingCharges\\app\\Models\\ShippingMethod;', $content);
             $content = str_replace('use admin\\shipping_charges\\Models\\ShippingRate;', 'use Modules\\ShippingCharges\\app\\Models\\ShippingRate;', $content);
+            $content = str_replace('use admin\\shipping_charges\\Models\\ShippingZone;', 'use Modules\\ShippingCharges\\app\\Models\\ShippingZone;', $content);
             $content = str_replace('use admin\\shipping_charges\\Requests\\ShippingMethodCreateRequest;', 'use Modules\\ShippingCharges\\app\\Http\\Requests\\ShippingMethodCreateRequest;', $content);
             $content = str_replace('use admin\\shipping_charges\\Requests\\ShippingMethodUpdateRequest;', 'use Modules\\ShippingCharges\\app\\Http\\Requests\\ShippingMethodUpdateRequest;', $content);
             $content = str_replace('use admin\\shipping_charges\\Requests\\ShippingRateCreateRequest;', 'use Modules\\ShippingCharges\\app\\Http\\Requests\\ShippingRateCreateRequest;', $content);

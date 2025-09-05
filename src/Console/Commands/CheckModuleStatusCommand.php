@@ -19,6 +19,7 @@ class CheckModuleStatusCommand extends Command
             // Shipping Method files
             'Shipping Method Controller' => base_path('Modules/ShippingCharges/app/Http/Controllers/Admin/ShippingMethodManagerController.php'),
             'Shipping Method Model' => base_path('Modules/ShippingCharges/app/Models/ShippingMethod.php'),
+            'Shipping Zone Model' => base_path('Modules/ShippingCharges/app/Models/ShippingZone.php'),
             'Shipping Method Request (Create)' => base_path('Modules/ShippingCharges/app/Http/Requests/ShippingMethodCreateRequest.php'),
             'Shipping Method Request (Update)' => base_path('Modules/ShippingCharges/app/Http/Requests/ShippingMethodUpdateRequest.php'),
 

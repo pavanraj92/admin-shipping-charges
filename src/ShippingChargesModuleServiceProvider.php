@@ -19,7 +19,13 @@ class ShippingChargesModuleServiceProvider extends ServiceProvider
             __DIR__ . '/../resources/views'      // Package views as fallback
         ], 'shipping_charges');
 
-        $this->mergeConfigFrom(__DIR__.'/../config/shipping_charges.php', 'shipping_charges.constants');
+        
+        if (file_exists(base_path('Modules/ShippingCharges/config/shipping_charge.php'))) {
+            $this->mergeConfigFrom(base_path('Modules/ShippingCharges/config/shipping_charge.php'), 'shipping_charges.constants');
+        } else {
+            // Fallback to package config if published config doesn't exist
+            $this->mergeConfigFrom(__DIR__.'/../config/shipping_charges.php', 'shipping_charges.constants');
+        }
 
         // Also register module views with a specific namespace for explicit usage
         if (is_dir(base_path('Modules/ShippingCharges/resources/views'))) {
@@ -29,11 +35,6 @@ class ShippingChargesModuleServiceProvider extends ServiceProvider
         // Also load migrations from published module if they exist
         if (is_dir(base_path('Modules/ShippingCharges/database/migrations'))) {
             $this->loadMigrationsFrom(base_path('Modules/ShippingCharges/database/migrations'));
-        }
-
-        // Also merge config from published module if it exists
-        if (file_exists(base_path('Modules/ShippingCharges/config/shipping_charges.php'))) {
-            $this->mergeConfigFrom(base_path('Modules/ShippingCharges/config/shipping_charges.php'), 'shipping_charges.constants');
         }
         
         // Only publish automatically during package installation, not on every request
@@ -181,6 +182,11 @@ class ShippingChargesModuleServiceProvider extends ServiceProvider
         $content = str_replace(
             'use admin\\shipping\\Models\\ShippingRate;',
             'use Modules\\ShippingCharges\\app\\Models\\ShippingRate;',
+            $content
+        );
+        $content = str_replace(
+            'use admin\\shipping\\Models\\ShippingZone;',
+            'use Modules\\ShippingCharges\\app\\Models\\ShippingZone;',
             $content
         );
         $content = str_replace(
